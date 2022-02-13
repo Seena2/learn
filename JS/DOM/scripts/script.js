@@ -49,9 +49,30 @@ btn3.addEventListener('click',function(e){
 //DOM revision
 console.log(Node.ELEMENT_NODE); //logs 1,one is anumeric code value for element nodes
     //log all node types and there values
+    /*
     for (var key in Node){
         console.log(key,'='+Node[key]);
 
     }
+    */
     //JS-DOM -Traversy Media Video code along
-    
+    //EXAMINE THE DOCUMENT OBJECT
+    /*console.log(document);
+    console.log(document.domain); //logs the domain we are running on. in this case localhost
+    console.log(document.URL);//access the url of our page
+    console.log(document.title);// logs title of the page
+    document.title="tile setfrom JS"; //sets or cahnge title of page on the run(Go)
+    console.log(document.doctype);// logs the doc type
+    console.log(document.head);//grabs the head elemnt and its constituency
+    console.log(document.body);//grabs body element
+    console.log(document.all); //logs array like html colection of every thing in the DOM
+    console.log(document.all[10]);//access element via its index
+    document.all[10].textContent='Helo from JS'; //select element via index and change contetn
+    //this is not recommended b/c when another item is added before the target item the index will change along
+    console.log(document.forms);// logs all forms on the page as a collection
+    console.log(document.links);//returns all the links
+    console.log(document.images);
+      */
+     //SELECTORS -to query the DOM
+     //GETELEMENT BY ID
+     console.log(document.getElementById('header-tile'));

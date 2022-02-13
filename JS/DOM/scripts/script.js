@@ -46,4 +46,12 @@ btn3.addEventListener('click',function(e){
 btn3.addEventListener('click',function(e){
     e.target.style.background='blue';
 });
+//DOM revision
+console.log(Node.ELEMENT_NODE); //logs 1,one is anumeric code value for element nodes
+    //log all node types and there values
+    for (var key in Node){
+        console.log(key,'='+Node[key]);
 
+    }
+    //JS-DOM -Traversy Media Video code along
+    

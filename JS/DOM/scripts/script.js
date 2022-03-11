@@ -191,7 +191,172 @@ console.log(Node.ELEMENT_NODE); //logs 1,one is anumeric code value for element 
          itemList.previousElementSibling.style.color='green';
         */
     //createElement
+    /*
     let newDiv=document.createElement('div')   //creates div
+    console.log(newDiv);
+    newDiv.className='hello';//adds class name to the div element
+    newDiv.id='hello1'; //add id to div
+    newDiv.setAttribute('title','Hello div');//set attribute title to div
+    let newDivText= document.createTextNode('I am text content to be added to div via JS'); //creete text node
+    newDiv.appendChild(newDivText);
+    //add the created element to DOM
+    //first point to where it should inserted
+    let containerDiv=document.querySelector('header .container');// grabs container class in the header tag
+    let h1=document.querySelector('header h1');//gets h1 in the header
+    containerDiv.insertBefore(newDiv,h1);//inserts newDiv before h1 inside div with class name container 
+    newDiv.style.fontSize='30px'; //adding style 
+    */
+   //EVENT LISTENER
+    /*
+   let button= document.getElementById('button'); //grab an element
+   button.addEventListener('click',buttonClick);
+   function buttonClick(e){
+      
+       console.log('Button clicked');
+       document.getElementById('header-title').textContent='changed with button click';
+        document.querySelector('#main').style.background='#ccc';
+       console.log(e.target); //returns where the event is fired from
+       console.log(e.target.id);//gets the id of element the event fired from
+       console.log(e.target.className); //returns all the class Names 
+       //add effect to page/DOM on the Go
+       let output=document.getElementById('output');
+       output.innerHTML='<h3>'+e.target.id+'</h3>';
+         console.log(e.type);//returns what type of event it is
+         console.log(e.clientX);// horizontal position where the button is clicked from left browser window
+         console.log(e.clientY);// vertical position where the button is clicked from top of browser window
 
+         console.log(e.offsetX);// horizontal position where the button is clicked from start of the element
+         console.log(e.offsetY);
+        
+       console.log(e.altKey);// check if alt key is hold while clicking
+       console.log(e.ctrlKey);//
+       console.log(e.shiftKey);
 
+    }
+    */
+   // OTHER EVENT TYPES
+   let button= document.getElementById('button'); //grab an element
+   let box= document.getElementById('box'); //grab an element
+   function whichEvent(e){
+       console.log('Event Type :'+e.type);
+       /*
+       //lets grap x & y coordinet when mouse move in grey box and display the location in div with class name otput
+       let output=document.getElementById('output');
+       output.innerHTML='<h3>MouseX: '+e.offsetX+ ' </h3> <h3>MouseY:'+e.offsetY+'</h3>';
+        */
+       //or on mouse move we can change the background of the box
+       //box.style.backgroundColor="rgb("+e.offsetX+","+e.offsetY+",40)";
+
+       //grap what key is pressed on the keynoard and place it in the output div
+       let opt= document.getElementById('output');
+       opt.innerHTML="<h3>"+e.target.value+"</h3>";
+
+      
+       
+    }
+    // button.addEventListener('click',whichEvent); //runs when click event is triggered on button element
+    //button.addEventListener('dblclick',whichEvent); //double click event
+    //button.addEventListener('mousedown',whichEvent); //mouse pressed against, does not wiat for mouse to be lifted
+    //button.addEventListener('mouseup',whichEvent); //runs when mouse is released from being pressed state
+
+    //box.addEventListener('mouseenter',whichEvent);//treagered when mouse enters the area of target element
+    //box.addEventListener('mouseleave',whichEvent);
+
+    //box.addEventListener('mouseover',whichEvent); //same to mouseenter but it is for inner element 
+    //box.addEventListener('mouseout',whichEvent);
+
+    //box.addEventListener('mousemove',whichEvent);// when mouse move  inside target elt
    
+    //keyboard and input Events
+    let itemInput=document.querySelector('input[type="text"]');//grabs input
+    let form=document.querySelector('form');//gets the form
+
+    //itemInput.addEventListener('keydown',whichEvent);//runs when key is pressed on the keyboard
+    //itemInput.addEventListener('keyup',whichEvent);//runs when key is released after pressing
+    //itemInput.addEventListener('keypress',whichEvent);
+
+    //itemInput.addEventListener('focus',whichEvent);//when clicked inside input
+   // itemInput.addEventListener('blur',whichEvent); //when clicked outsied the input
+
+    //itemInput.addEventListener('cut',whichEvent); //when cut is happen on element
+    //itemInput.addEventListener('paste',whichEvent);
+
+    //itemInput.addEventListener('input',whichEvent);//when data inserted or removed from input field
+
+    //fire event when the state change, eg, select obtion from selct input
+    //let select=document.querySelector('select');
+    //select.addEventListener('change',whichEvent);
+    //select.addEventListener('input',whichEvent);
+
+    //form.addEventListener('submit',whichEvent);
+
+
+    //PROJECT: add items to page when the submit button is clicked
+    let frm=document.getElementById('addForm'); //grab the form
+    let itemLst=document.getElementById('items');//grab list items containing input text
+    //create form submit event
+    frm.addEventListener('submit',addItem);
+    //addItem function which runs when submit button is clicked
+    function addItem(e){
+        e.preventDefault(); //avoids form default form submition behaviours(?)
+        //console.log('dude'); //test
+        //get value entered to input field
+        let newItem=document.getElementById("itemToAdd").value;//grab input field that recieves value
+        //create new <li> element and add the value to the list
+        let newLi= document.createElement('li');
+        // Add class that make this li similar to others in style
+        newLi.className="list-group-item";
+        //console.log(newLi);//test if class is added correctly
+       
+        //create and add text node representing recieved value from input fied to list
+        newLi.appendChild(document.createTextNode(newItem));
+        
+
+         //create delete button
+         let deleteBtnX=document.createElement('button');
+         // add classes of del button similar to the on used for other delete btn
+         deleteBtnX.className='btn btn-danger btn-sm float-right delete'
+         //append text node with text "X" to the button
+         deleteBtnX.appendChild(document.createTextNode('X'));
+
+         //append the button to li
+         newLi.appendChild(deleteBtnX);
+         //append li to the Ul list
+         itemList.appendChild(newLi);
+ 
+    }
+        // Delete(remove) item by when delete("X") is clicked
+        itemList.addEventListener('click',removeItem);//grab list and add listener to it
+        //removeItem function declaration, takes event object "e"
+        function removeItem(e){
+            //console.log(1);//test if function works, NB this works on entire li section,
+            // so make sure it works only when only delete button is clicked
+            if(e.target.classList.contains('delete')){ //since btn have class delete, this verifies it 
+                //console.log(2);// test if we grab the btn
+                if(confirm('Are you sure, Do want to remove the item?')){ //simple confirmation popup
+                    let liTobeRemoved=e.target.parentElement; //get the li containing the target del btn
+                    itemList.removeChild(liTobeRemoved);
+                }
+            }
+        }
+        //Filter Event
+        let filter=document.getElementById('filter');
+        filter.addEventListener('keyup',filterItems);
+        //filter Item function
+        function filterItems(e){
+            //convert all to lowerCase for comparision
+            let txt=e.target.value.toLowerCase();
+            // console.log(txt); //test input value conveersion
+            //grab all the li with in the itemlist(ul)
+            let itms=itemList.getElementsByTagName('li');
+            //convert this html collection to array to get all array methods
+            Array.from(itms).forEach(function(item){
+                let itemName=item.firstChild.textContent;
+                if(itemName.toLowerCase().indexOf(txt)!= -1){ //if match found
+                    item.style.display='block';
+                }else{
+                    item.style.display='none';
+                }
+            });
+
+        }
